@@ -6,8 +6,12 @@
   - El atributo class no lo quiere, debe nombrarse className en React. En JS Class es palabra reservada.
   */ }
 
-import data from './data.json'  
-console.log(data)
+
+import data from './data.json'
+
+import JobCard from './components/JobCard.jsx'
+
+const RESULTS_PER_PAGE = 3
 
 function Header() {
   return (
@@ -34,6 +38,33 @@ function Footer() {
     <footer>
       <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
     </footer>
+  )
+}
+
+function Pagination() {
+
+  const totalData = data.length
+  const numPag = Math.ceil(totalData / RESULTS_PER_PAGE)
+
+  return (
+    <nav className="pagination">
+      <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M15 6l-6 6l6 6" />
+      </svg></a>
+      <a className="is-active" href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+        strokeLinecap="round" strokeLinejoin="round"
+        className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M9 6l6 6l-6 6" />
+      </svg></a>
+    </nav>
   )
 }
 
@@ -108,26 +139,18 @@ function App() {
           <h2>Resultados de búsqueda</h2>
 
           <div className="jobs-listings">
+            {data.map(job => (
+              <JobCard
+                titulo={job.titulo}
+                empresa={job.empresa}
+                ubicacion={job.ubicacion}
+                descripcion={job.descripcion}
+              />
+            ))}
           </div>
 
-          <nav className="pagination">
-            <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-              strokeLinecap="round" strokeLinejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M15 6l-6 6l6 6" />
-            </svg></a>
-            <a className="is-active" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-              strokeLinecap="round" strokeLinejoin="round"
-              className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M9 6l6 6l-6 6" />
-            </svg></a>
-          </nav>
+          <Pagination />
+
         </section>
       </main>
 
