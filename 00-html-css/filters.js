@@ -34,6 +34,12 @@ document.addEventListener('keydown', function(event){
 /*Cuando selecciono una opcion del select, me devuelve el valor seleccionado y lo muestra en el span de id filter-selected-value.
 Seleccionamos todos los elementos de lso empleos, escuchamos el evento de cambio de filtro, recuperamos el valor y aparecerá el valor en la web, una vez eso, iteramos todos los elementos con la clase job-listing-card y recuperamos informacion del dataset o del gettAttribute haciendo referencia a data-modalidad. Si los valores coinciden con dataset se muestran, si no se ocultan.*/
 
+import { state } from './config.js'
+
+state.count++
+
+console.log(state)
+
 const filter = document.querySelector('#filter-location')
 const mensaje = document.querySelector('#filter-selected-value')
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>DevJobs - Empleos</title>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Listado con empleos y filtros para encontrar el trabajo de tus sueños.">
+
+  <link rel="stylesheet" href="./src/index.css" />
+
+  <!-- SE IMPORTAN BIBLIOTECAS REACT -->
+  <script type="module">
+    import React from "https://esm.sh/react?dev";
+    import ReactDOM from "https://esm.sh/react-dom/client?dev";
+
+    window.React = React
+    window.ReactDOM = ReactDOM
+  </script>
+
+  <!-- SE IMPORTA BABEL, transforma JS a JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    // componente de React devuelve elementos. Nombre con primera letra en mayuscula
+    function JobCard({ titulo, empresa, ubicacion, descripcion }) {
+
+      //Estado del boton: const [esta encendido, actualizacion] = React.useState(posicion inicial). Devuelve array de 2 posiciones [estado, actualizacion de estado]
+      const [isApplied, setIsApplied] = React.useState(false)
+
+      console.log('---> render')
+
+
+      function handleClick() { //Evento click en botón Aplicar
+        setIsApplied(!isApplied)
+      }
+
+      const text = isApplied ? 'Aplicado' : 'Aplicar'
+      const buttonClass = isApplied ? 'is-applied' : ''
+      const isAppliedText = isApplied ? 'Sí' : 'No'
+
+      return (
+        <article className="job-listing-card">
+          <div>
+            <h3>{titulo}</h3>
+            <small>{empresa} - {ubicacion} - ¿He aplicado? {isAppliedText}</small>
+            <p>{descripcion}</p>
+          </div>
+          <button            
+            className={`button-apply-job ${buttonClass}`}
+            onClick={handleClick}>
+            {text}
+          </button>
+        </article>
+      )
+    }
+
+    function App() {
+      return (
+        <div className="jobs-listings">
+          <JobCard
+            titulo="Desarrollador/a Frontend React.js"
+            empresa="Tech Solutions"
+            ubicacion="Remoto"
+            descripcion="Únete a nuestro equipo como desarrollador/a frontend especializado en React.js. Trabaja en proyectos innovadores y colabora con un equipo dinámico."
+          />
+        </div>
+      )
+    }
+
+    const rootEl = document.querySelector('#root');
+    const root = ReactDOM.createRoot(rootEl)
+    root.render(<App />)
+
+  </script>
+
+</head>
+
+<body>
+  <header>
+    <h1>
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+      DevJobs
+    </h1>
+
+    <nav>
+      <a href="" target="_self">Inicio</a>
+      <a href="empleos.html" target="_blank" rel="noopener noreferrer">Empleos</a>
+      <a href="" target="_blank" rel="noopener noreferrer">Empresas</a>
+      <a href="" target="_blank" rel="noopener noreferrer">Salarios</a>
+    </nav>
+
+    <div>
+      <devjobs-avatar service="google" username="google.com" size="32">
+      </devjobs-avatar>
+    </div>
+  </header>
+
+  <main>
+    <section class="jobs-search">
+      <h1>React.js, primeros pasos</h1>
+    </section>
+
+    <section>
+      <h2>Empleos disponibles</h2>
+      <div id="root"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
+  </footer>
+</body>
+
+</html>
