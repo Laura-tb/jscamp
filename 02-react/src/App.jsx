@@ -11,7 +11,7 @@ import data from './data.json'
 console.log(data)
 import JobCard from './components/JobCard.jsx'
 
-
+const RESULTS_PER_PAGE = 3
 
 function Header() {
   return (
@@ -112,12 +112,14 @@ function App() {
           <h2>Resultados de búsqueda</h2>
 
           <div className="jobs-listings">
-            <JobCard
-              titulo="Desarrollador/a Frontend React.js"
-              empresa="Tech Solutions"
-              ubicacion="Remoto"
-              descripcion="Únete a nuestro equipo como desarrollador/a frontend especializado en React.js. Trabaja en proyectos innovadores y colabora con un equipo dinámico."
-            />
+            {data.map(job => (
+              <JobCard
+                titulo={job.titulo}
+                empresa={job.empresa}
+                ubicacion={job.ubicacion}
+                descripcion={job.descripcion}
+              />
+            ))}
           </div>
 
           <nav className="pagination">
