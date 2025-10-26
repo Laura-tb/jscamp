@@ -1,0 +1,1 @@
+// Crear el componente JobCard e importarlo y usarlo en App.jsx
