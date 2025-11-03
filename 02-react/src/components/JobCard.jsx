@@ -1,34 +1,38 @@
 // Crear el componente JobCard e importarlo y usarlo en App.jsx
 // componente de React devuelve elementos. Nombre con primera letra en mayuscula
 
-import React from 'react'
+import { useState } from 'react'
 
-function JobCard({ titulo, empresa, ubicacion, descripcion }) {
+export function JobCard({ job }) {
 
-    const [isApplied, setIsApplied] = React.useState(false)
+    const [isApplied, setIsApplied] = useState(false)
 
-    function handleClick() {
-        setIsApplied(!isApplied)
-
+    const handleApplyClick = () => {
+        setIsApplied(true)
     }
-    const text = isApplied ? 'Aplicado' : 'Aplicar'
-    const buttonClass = isApplied ? 'is-applied' : ''
 
+    const buttonClasses = isApplied ? 'button-apply-job is-applied' : 'button-apply-job'
+    const buttonText = isApplied ? 'Aplicado' : 'Aplicar'
 
     return (
-        <article className="job-listing-card">
+        <article 
+            className="job-listing-card"
+            data-modalidad={job.data.modalidad}
+            data-nivel = {job.data.nivel}
+            data-technology = {job.data.techonology}
+        >
             <div>
-                <h3>{titulo}</h3>
-                <small>{empresa} - {ubicacion} </small>
-                <p>{descripcion}</p>
+                <h3>{job.titulo}</h3>
+                <small>{job.empresa} - {job.ubicacion} </small>
+                <p>{job.descripcion}</p>
             </div>
             <button
-                className={`button-apply-job ${buttonClass}`}
-                onClick={handleClick}>
-                {text}
+                className={buttonClasses}
+                onClick={handleApplyClick}>
+                {buttonText}
             </button>
         </article>
     )
 }
 
-export default JobCard
+
